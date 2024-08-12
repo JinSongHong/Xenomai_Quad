@@ -142,6 +142,10 @@ void Controlwindow::Widget_update(){
   IMU_on = false; 
   if(ui -> OriDOB_on -> isChecked()){OriDOB_on = true;}
   else {OriDOB_on = false;}  
+  if(ui -> safety_on -> isChecked()){safety_on = true;}
+  else {safety_on = false;}
+  current_limit = ui->current_limit->value();
+  
 }
 
 
@@ -157,7 +161,8 @@ void Controlwindow::homming()
 
 void Controlwindow::on_Homming_clicked()
 {   
-    
+    Homming_clicked = true;
+   
     if(ui->Homming->isChecked())
     { 
       for(int i = 0; i < NUMOFSLAVES; i ++)
@@ -426,9 +431,8 @@ void Controlwindow::Mutex_exchange()
         Motor_current[i] = _M_actual_current[i];
         Motor_pos[i] = _M_motor_position[i];
         _M_Motor_pos_init[i] = Motor_pos_init[i];
-        
-        
       }
+      
       
       for (int i = 0; i < 4; i++) {
         _M_RW_r_posPgain[i] = RW_r_posPgain[i];
@@ -464,10 +468,14 @@ void Controlwindow::Mutex_exchange()
       _M_RWDOB_on = RWDOB_on;
       _M_OriDOB_on = OriDOB_on;
       _M_IMU_on = IMU_on;
+      _M_safety_on = safety_on;
       
       _M_Homming_checked = Homming_checked;
       _M_Homming_clicked = Homming_clicked;
       _M_DataLog_flag = DataLog_flag;
+
+      //// Current Limit ////
+      _M_current_limit = current_limit;      
       
     } else {
       QString str_errCode;

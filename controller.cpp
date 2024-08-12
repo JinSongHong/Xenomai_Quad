@@ -11,6 +11,20 @@ Controller::Controller()
     deltapos[0][i] = 0.0;
     deltapos[1][i] = 0.0;
     deltapos[2][i] = 0.0;
+    
+    tau_dhat[i] = 0.0;
+    rhs_dob_LPF[i] = 0.0;
+    lhs_dob_LPF[i] = 0.0;
+    rhs_dob[i] = 0.0;
+    lhs_dob[i] = 0.0;
+    
+    
+    j_I_term_[i] = 0;
+    j_D_term_[i] = 0;
+    j_P_term_ = 0;
+    j_imax_ = 0;
+    j_err[i] = 0;
+  
   }
   
     error.setZero();
@@ -127,7 +141,9 @@ double Controller::pid(Vector2d posRW_err, Vector2d posRW_err_old, Vector2d velR
 
 Vector2d Controller::RWDOB(double thmddot, double thbddot, Vector2d tau, Matrix2d Jacobian, int Leg_num)
 {
-
+  
+  if(Ctrl_on==true)
+  {
 //  tau_mutex_dhat(2,4);
    cutoff_RWDOB = RWDOB_cutoff[Leg_num];
    thddot[0] = thmddot;
@@ -155,11 +171,12 @@ Vector2d Controller::RWDOB(double thmddot, double thbddot, Vector2d tau, Matrix2
    }
    
     tau_mutex_dhat[Leg_num] = tau_dhat;
-    
+
+//    cout << tau_mutex_dhat[0][0] << endl;
    return tau_dhat;
+  }
+  else return Vector2d::Zero() ;
 }
-
-
 void Controller::RWFOB(Vector2d tau, Matrix2d Jacobian_T, double thddot_m, double thddot_b, int Leg_num)
 {
   if (Ctrl_on == true)
@@ -365,15 +382,28 @@ void Controller::exchange_mutex(int Leg_num) // Mutex에서 데이터를 받아�
   _M_ori_dhat_LPF = ori_dhat_LPF[0];
   _M_tau_dhat[Leg_num] = tau_mutex_dhat[Leg_num];
   _M_forceExt_hat[Leg_num] = Extforce_mutex[Leg_num];
-  
-  //// Trunk ////
-  Trunk_ori_for_DOB[0] = _M_Trunk_ori[0];
-  Trunk_ori_for_DOB[1] = _M_Trunk_ori[1];
-  
+
   //// Flag //// 
   RWDOB_on = _M_RWDOB_on;
   Ctrl_on = _M_Ctrl_on;
   OriDOB_on = _M_OriDOB_on;
+}
+
+void Controller::Exchagne_mutex()
+{
+  //// Trunk ////
+  Trunk_ori_for_DOB[0] = _M_Trunk_ori[0];
+  Trunk_ori_for_DOB[1] = _M_Trunk_ori[1];
+  Ori_DOB_cutoff = _M_Ori_DOB_cutoff;
+  _M_ori_dhat_LPF = ori_dhat_LPF[0];
+  
+  //// Leg ////
+  r_vel_ref = _M_ref_r_vel;
+  
+  //// Flag //// 
+  RWDOB_on = _M_RWDOB_on;
+  OriDOB_on = _M_OriDOB_on;
+  Ctrl_on = _M_Ctrl_on;
 }
 
 double Controller::get_posPgain(int Leg_num, int r0th1) {

@@ -64,11 +64,20 @@ void Actuator::DATA_Send(output_GTWI_t** out_twitter_GTWI) //
     out_twitter_GTWI[Motor_Num]->RXPDO_TARGET_POSITION_DATA = (int32)(target_position * (Enc_resolution / (2 * M_PI)));
     out_twitter_GTWI[Motor_Num]->RXPDO_TARGET_POSITION_DATA_0 = (int32)(target_position * (Enc_resolution / (2 * M_PI)));
     out_twitter_GTWI[Motor_Num]->RXPDO_TARGET_VELOCITY_DATA = (int32)(target_speed * (Enc_resolution / (2 * M_PI)));
-    out_twitter_GTWI[Motor_Num]->RXPDO_TARGET_TORQUE_DATA = (int16)(target_torque * 1000000.0 / (45000 * Torque_constant * Gear_ratio)); // DS402 Maxon
+    if(safety_flag == true)
+    {
+      out_twitter_GTWI[Motor_Num]->RXPDO_TARGET_TORQUE_DATA = (int16)(target_torque * 1000000.0 / (45000 * Torque_constant * Gear_ratio)); // DS402 Maxon
+      out_twitter_GTWI[Motor_Num]->RXPDO_CONTROLWORD_DATA = controlword;
+      out_twitter_GTWI[Motor_Num]->RXPDO_CONTROLWORD_DATA_0 = controlword;
+    }
+    else
+    {
+      out_twitter_GTWI[Motor_Num]->RXPDO_TARGET_TORQUE_DATA = 0; // DS402 Maxon
+      out_twitter_GTWI[Motor_Num]->RXPDO_CONTROLWORD_DATA = 0;
+      out_twitter_GTWI[Motor_Num]->RXPDO_CONTROLWORD_DATA_0 = 0;
+    }
     out_twitter_GTWI[Motor_Num]->RXPDO_DIGITAL_OUTPUTS_DATA = digital_output;
-    out_twitter_GTWI[Motor_Num]->RXPDO_MAXIMAL_TORQUE = 1000; //?
-    out_twitter_GTWI[Motor_Num]->RXPDO_CONTROLWORD_DATA = controlword;
-    out_twitter_GTWI[Motor_Num]->RXPDO_CONTROLWORD_DATA_0 = controlword;
+    out_twitter_GTWI[Motor_Num]->RXPDO_MAXIMAL_TORQUE = 1000; //?  
     out_twitter_GTWI[Motor_Num]->RXPDO_MODE_OF_OPERATION_DATA = modeOP;
     
 //    if (Motor_Num == 0)
@@ -135,7 +144,7 @@ void Actuator::DATA_unit_change() {
     } 
     
     Motor_torque = (double)((double)torque_raw) * 45000 / 1000000;  
-        
+    
 }
 
 void Actuator::get_Derivative_cutoff()
@@ -153,6 +162,60 @@ void Actuator::get_Derivative_cutoff()
     Derivative_cutoff = 5;
 }
 
+void Actuator::safety()
+{
+  if(safety_on == true)
+  {
+    //HAA
+    if(Motor_Num == 0 || Motor_Num == 5 || Motor_Num == 6 || Motor_Num == 11)
+    {
+      if(Motor_pos >= 0.2 || Motor_pos <= -0.5) 
+      {
+        cout << " Motor[" << Motor_Num << "] reach ROM!" << endl;  
+        safety_flag = false;
+      }
+      else if(abs(Motor_torque) >= current_limit)
+      {
+        cout << " Motor[" << Motor_Num << "]'s current become greater than " << current_limit << endl;  
+        safety_flag = false;
+      }
+      else
+      safety_flag = true;
+    }
+    else if(Motor_Num == 12 || Motor_Num == 13)
+    {
+      if(Motor_pos <= -0.1 || Motor_pos >= 0.1) 
+      {
+        cout << " Motor[" << Motor_Num << "] reach ROM!" << endl;
+        safety_flag = false;
+      }
+      else if(abs(Motor_torque) >= current_limit)
+      {
+        cout << " Motor[" << Motor_Num << "]'s current become greater than " << current_limit << endl;  
+        safety_flag = false;
+      }
+      else
+      safety_flag = true;    
+    }
+    //HIP, KNEE
+    else
+    {  
+      if(Motor_pos <= 0.1 || Motor_pos >= M_PI - 0.1) 
+      {
+        cout << " Motor[" << Motor_Num << "] reach ROM!" << endl;
+        safety_flag = false;
+      }
+      else if(abs(Motor_torque) >= current_limit)
+      {
+        cout << " Motor[" << Motor_Num << "]'s current become greater than " << current_limit << endl;  
+        safety_flag = false;
+      }
+      else
+      safety_flag = true;
+    }
+   }
+}
+
 void Actuator::exchange_mutex() {
 
     controlword = _M_CONTROLWORD[Motor_Num];
@@ -161,8 +224,12 @@ void Actuator::exchange_mutex() {
   
     _M_motor_position[Motor_Num] = Motor_pos;
     _M_actual_current[Motor_Num] = Motor_torque;
-
-          
+    _M_safety_flag = safety_flag;
+    safety_on = _M_safety_on;
+    safety_flag = _M_safety_flag;
+    
+    current_limit = _M_current_limit;
+    
     get_Derivative_cutoff();
     
     //// Flag ////

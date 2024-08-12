@@ -59,6 +59,11 @@ private:
     double Motor_Home_pos[14];
     Vector2d tau_dhat[4];
     Vector2d forceExt_hat[4];
+    Vector4d ori_dhat_LPF;
+    Vector3d Trunk_ori; 
+    Vector3d Trunk_linear_vel;
+    
+    bool IMU_on = false;
        
 private slots:
   void updateWindow();

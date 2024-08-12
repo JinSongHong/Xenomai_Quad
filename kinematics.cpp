@@ -115,8 +115,8 @@ void Kinematics::pos_trajectory(int traj_t, int Leg_num, Vector2d deltapos)
   {
     case 0: // FL position trajectory
 
-      ref_r_pos[0] = 0.05*sin(2*PI*f*0.001*traj_t) + 0.3536 + deltapos[0];
-      ref_th_pos[0] = PI/2 + deltapos[1];
+      ref_r_pos[0] = 0.05*sin(2*PI*f*0.001*traj_t) + 0.3536;// + deltapos[0];
+      ref_th_pos[0] = PI/2;// + deltapos[1];
       
 //      cout << "deltapos[0]: " << deltapos[0] << endl;
       
@@ -131,9 +131,9 @@ void Kinematics::pos_trajectory(int traj_t, int Leg_num, Vector2d deltapos)
 //        th_pos_error[0] = ref_th_pos[0] - posRW[1];
   
     case 1: // FR position trajectory
-//      ref_r_pos[1] = 0.05*sin(2*PI*f*0.001*traj_t) + 0.3536 + deltapos[0];
-      ref_r_pos[1] = 0.3536;
-      ref_th_pos[1] = PI/2 + deltapos[1];
+      ref_r_pos[1] = 0.05*sin(2*PI*f*0.001*traj_t) + 0.3536;// + deltapos[0];
+//      ref_r_pos[1] = 0.3536 + deltapos[0];
+      ref_th_pos[1] = PI/2;
       
       posRW_error[0][0] = ref_r_pos[1] - posRW[0];
       posRW_error[1][0] = ref_th_pos[1] - posRW[1];

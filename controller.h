@@ -136,6 +136,7 @@ public:
   // Data set//
   void setDelayData();
   void exchange_mutex(int Leg_num);
+  void Exchagne_mutex();
   void Cal_Parameter(double thm, double thb, double thmdot, double thbdot);
   
   // DOB

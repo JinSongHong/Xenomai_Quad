@@ -124,6 +124,10 @@ extern bool _M_stop;
 extern bool _M_IMU_on;
 extern bool _M_RWDOB_on;
 extern bool _M_OriDOB_on;
+extern bool _M_safety_on;
+extern bool _M_safety_flag;
 
+//// Safety ////
+extern double _M_current_limit;
 
 #endif // DATA_MUTEX_H

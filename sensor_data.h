@@ -10,8 +10,7 @@
 class sensor_data
 {
 private:
-//  mscl::Connection connection;
-//  mscl::InertialNode node;
+
   std::unique_ptr<mscl::Connection> connection;
   std::unique_ptr<mscl::InertialNode> node;
   

@@ -23,10 +23,11 @@ void data_logging::data_log()
                 isDataLogging = true;
 ////JOINT ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                 os_data.width(10); os_data<<std::left<<QString("time : ").toStdString(); os_data.width(5); os_data<<std::left<< "Data";
-                os_data.width(10); os_data<<std::left<<QString("FL_r_pos : ").toStdString(); os_data.width(5); os_data<<std::left<< "Data";// RW_pos[1];
-                os_data.width(10); os_data<<std::left<<QString("FR_r_pos : ").toStdString(); os_data.width(5); os_data<<std::left<< "Data";
-                os_data.width(10); os_data<<std::left<<QString("RL_r_pos : ").toStdString(); os_data.width(5); os_data<<std::left<< "Data";
-                os_data.width(10); os_data<<std::left<<QString("RR_r_pos : ").toStdString(); os_data.width(5); os_data<<std::left<< "Data";
+                os_data.width(10); os_data<<std::left<<QString("FL_r_pos : ").toStdString(); os_data.width(5); os_data<<std::left<< RW_r_pos[0];// ;
+                os_data.width(10); os_data<<std::left<<QString("FR_r_pos : ").toStdString(); os_data.width(5); os_data<<std::left<< RW_r_pos[1];
+                os_data.width(10); os_data<<std::left<<QString("RL_r_pos : ").toStdString(); os_data.width(5); os_data<<std::left<< RW_r_pos[2];
+                os_data.width(10); os_data<<std::left<<QString("RR_r_pos : ").toStdString(); os_data.width(5); os_data<<std::left<< RW_r_pos[3];
+                
                
 //                os_data.width(10); os_data<<std::left<<QString(" : ").toStdString(); os_data.width(5); os_data<<std::left<< "Data";
 //                os_data.width(10); os_data<<std::left<<QString(" : ").toStdString(); os_data.width(5); os_data<<std::left<< "Data"; 

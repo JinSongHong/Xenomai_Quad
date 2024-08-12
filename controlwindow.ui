@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1186</width>
+    <width>1239</width>
     <height>717</height>
    </rect>
   </property>
@@ -22,7 +22,7 @@
      <rect>
       <x>0</x>
       <y>0</y>
-      <width>1481</width>
+      <width>1231</width>
       <height>781</height>
      </rect>
     </property>
@@ -44,7 +44,7 @@ color: white
       <property name="geometry">
        <rect>
         <x>50</x>
-        <y>480</y>
+        <y>510</y>
         <width>221</width>
         <height>61</height>
        </rect>
@@ -77,7 +77,7 @@ color: white</string>
       <property name="geometry">
        <rect>
         <x>50</x>
-        <y>410</y>
+        <y>450</y>
         <width>221</width>
         <height>61</height>
        </rect>
@@ -265,7 +265,7 @@ color: white</string>
       <property name="geometry">
        <rect>
         <x>50</x>
-        <y>30</y>
+        <y>100</y>
         <width>101</width>
         <height>41</height>
        </rect>
@@ -284,7 +284,7 @@ color: white</string>
       <property name="geometry">
        <rect>
         <x>50</x>
-        <y>70</y>
+        <y>140</y>
         <width>101</width>
         <height>41</height>
        </rect>
@@ -303,7 +303,7 @@ color: white</string>
       <property name="geometry">
        <rect>
         <x>50</x>
-        <y>110</y>
+        <y>180</y>
         <width>101</width>
         <height>41</height>
        </rect>
@@ -322,7 +322,7 @@ color: white</string>
       <property name="geometry">
        <rect>
         <x>50</x>
-        <y>250</y>
+        <y>300</y>
         <width>101</width>
         <height>41</height>
        </rect>
@@ -341,7 +341,7 @@ color: white</string>
       <property name="geometry">
        <rect>
         <x>50</x>
-        <y>210</y>
+        <y>260</y>
         <width>101</width>
         <height>41</height>
        </rect>
@@ -360,7 +360,7 @@ color: white</string>
       <property name="geometry">
        <rect>
         <x>50</x>
-        <y>290</y>
+        <y>340</y>
         <width>101</width>
         <height>41</height>
        </rect>
@@ -379,7 +379,7 @@ color: white</string>
       <property name="geometry">
        <rect>
         <x>170</x>
-        <y>70</y>
+        <y>140</y>
         <width>101</width>
         <height>41</height>
        </rect>
@@ -398,7 +398,7 @@ color: white</string>
       <property name="geometry">
        <rect>
         <x>170</x>
-        <y>30</y>
+        <y>100</y>
         <width>101</width>
         <height>41</height>
        </rect>
@@ -417,7 +417,7 @@ color: white</string>
       <property name="geometry">
        <rect>
         <x>170</x>
-        <y>290</y>
+        <y>340</y>
         <width>101</width>
         <height>41</height>
        </rect>
@@ -436,7 +436,7 @@ color: white</string>
       <property name="geometry">
        <rect>
         <x>170</x>
-        <y>210</y>
+        <y>260</y>
         <width>101</width>
         <height>41</height>
        </rect>
@@ -455,7 +455,7 @@ color: white</string>
       <property name="geometry">
        <rect>
         <x>170</x>
-        <y>110</y>
+        <y>180</y>
         <width>101</width>
         <height>41</height>
        </rect>
@@ -474,7 +474,7 @@ color: white</string>
       <property name="geometry">
        <rect>
         <x>170</x>
-        <y>250</y>
+        <y>300</y>
         <width>101</width>
         <height>41</height>
        </rect>
@@ -493,21 +493,21 @@ color: white</string>
       <property name="geometry">
        <rect>
         <x>130</x>
-        <y>0</y>
+        <y>70</y>
         <width>71</width>
         <height>21</height>
        </rect>
       </property>
       <property name="text">
-       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:16pt; font-weight:700; font-style:italic; color:#ffffff;&quot;&gt;Enable&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:16pt; font-weight:700; font-style:italic; color:#ffffff;&quot;&gt;Enable &lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
      </widget>
      <widget class="QPushButton" name="WL">
       <property name="geometry">
        <rect>
         <x>50</x>
-        <y>160</y>
-        <width>101</width>
+        <y>220</y>
+        <width>111</width>
         <height>41</height>
        </rect>
       </property>
@@ -524,9 +524,9 @@ color: white</string>
      <widget class="QPushButton" name="WR">
       <property name="geometry">
        <rect>
-        <x>170</x>
-        <y>160</y>
-        <width>101</width>
+        <x>160</x>
+        <y>220</y>
+        <width>111</width>
         <height>41</height>
        </rect>
       </property>
@@ -544,7 +544,7 @@ color: white</string>
       <property name="geometry">
        <rect>
         <x>50</x>
-        <y>330</y>
+        <y>380</y>
         <width>111</width>
         <height>71</height>
        </rect>
@@ -566,7 +566,7 @@ color: white</string>
       <property name="geometry">
        <rect>
         <x>160</x>
-        <y>330</y>
+        <y>380</y>
         <width>111</width>
         <height>71</height>
        </rect>
@@ -588,7 +588,7 @@ color: white</string>
       <property name="geometry">
        <rect>
         <x>50</x>
-        <y>550</y>
+        <y>570</y>
         <width>221</width>
         <height>61</height>
        </rect>
@@ -615,6 +615,52 @@ color: white</string>
       </property>
       <property name="checked">
        <bool>false</bool>
+      </property>
+     </widget>
+     <widget class="QCheckBox" name="safety_on">
+      <property name="geometry">
+       <rect>
+        <x>60</x>
+        <y>20</y>
+        <width>211</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(0, 180, 0);
+</string>
+      </property>
+      <property name="text">
+       <string>Safety ON/OFF</string>
+      </property>
+     </widget>
+     <widget class="QDoubleSpinBox" name="current_limit">
+      <property name="geometry">
+       <rect>
+        <x>190</x>
+        <y>30</y>
+        <width>71</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(50, 50, 100);</string>
+      </property>
+      <property name="value">
+       <double>10.000000000000000</double>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_41">
+      <property name="geometry">
+       <rect>
+        <x>110</x>
+        <y>0</y>
+        <width>111</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:700; color:#55ff00;&quot;&gt;Current Limit&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
      </widget>
     </widget>
@@ -1095,7 +1141,7 @@ text-decoration: underline;</string>
         <double>1000.000000000000000</double>
        </property>
        <property name="value">
-        <double>100.000000000000000</double>
+        <double>700.000000000000000</double>
        </property>
       </widget>
       <widget class="QDoubleSpinBox" name="FR_th_posPgain">
@@ -1118,7 +1164,7 @@ text-decoration: underline;</string>
         <double>1000.000000000000000</double>
        </property>
        <property name="value">
-        <double>100.000000000000000</double>
+        <double>700.000000000000000</double>
        </property>
       </widget>
       <widget class="QDoubleSpinBox" name="RR_th_posPgain">
@@ -1141,7 +1187,7 @@ text-decoration: underline;</string>
         <double>1000.000000000000000</double>
        </property>
        <property name="value">
-        <double>100.000000000000000</double>
+        <double>400.000000000000000</double>
        </property>
       </widget>
       <widget class="QDoubleSpinBox" name="RL_th_posPgain">
@@ -1164,7 +1210,7 @@ text-decoration: underline;</string>
         <double>1000.000000000000000</double>
        </property>
        <property name="value">
-        <double>100.000000000000000</double>
+        <double>700.000000000000000</double>
        </property>
       </widget>
       <widget class="QDoubleSpinBox" name="FL_th_posIgain">
@@ -1267,7 +1313,7 @@ text-decoration: underline;</string>
         <double>1000.000000000000000</double>
        </property>
        <property name="value">
-        <double>10.000000000000000</double>
+        <double>50.000000000000000</double>
        </property>
       </widget>
       <widget class="QDoubleSpinBox" name="FR_th_posDgain">
@@ -1290,7 +1336,7 @@ text-decoration: underline;</string>
         <double>1000.000000000000000</double>
        </property>
        <property name="value">
-        <double>10.000000000000000</double>
+        <double>50.000000000000000</double>
        </property>
       </widget>
       <widget class="QDoubleSpinBox" name="RR_th_posDgain">
@@ -1313,7 +1359,7 @@ text-decoration: underline;</string>
         <double>1000.000000000000000</double>
        </property>
        <property name="value">
-        <double>10.000000000000000</double>
+        <double>30.000000000000000</double>
        </property>
       </widget>
       <widget class="QDoubleSpinBox" name="RL_th_posDgain">
@@ -1336,7 +1382,7 @@ text-decoration: underline;</string>
         <double>1000.000000000000000</double>
        </property>
        <property name="value">
-        <double>10.000000000000000</double>
+        <double>50.000000000000000</double>
        </property>
       </widget>
       <widget class="QDoubleSpinBox" name="RR_th_posD_cutoff">
@@ -1527,8 +1573,8 @@ text-decoration: underline;</string>
       <property name="geometry">
        <rect>
         <x>890</x>
-        <y>150</y>
-        <width>281</width>
+        <y>130</y>
+        <width>191</width>
         <height>71</height>
        </rect>
       </property>
@@ -1544,9 +1590,9 @@ background-color: rgb(50, 40, 30);</string>
       <property name="geometry">
        <rect>
         <x>890</x>
-        <y>470</y>
-        <width>181</width>
-        <height>71</height>
+        <y>390</y>
+        <width>191</width>
+        <height>61</height>
        </rect>
       </property>
       <property name="font">
@@ -1558,7 +1604,7 @@ background-color: rgb(50, 40, 30);</string>
        </font>
       </property>
       <property name="styleSheet">
-       <string notr="true">background-color: rgb(0, 0, 130);</string>
+       <string notr="true">background-color: rgb(50, 70, 100);</string>
       </property>
       <property name="text">
        <string>Trajectory ON/OFF</string>
@@ -1600,6 +1646,9 @@ text-decoration: underline;</string>
        </property>
        <property name="maximum">
         <double>10000.000000000000000</double>
+       </property>
+       <property name="value">
+        <double>100.000000000000000</double>
        </property>
       </widget>
       <widget class="QDoubleSpinBox" name="FR_r_velDgain">
@@ -1675,7 +1724,7 @@ text-decoration: underline;</string>
         <double>1000.000000000000000</double>
        </property>
        <property name="value">
-        <double>200.000000000000000</double>
+        <double>0.000000000000000</double>
        </property>
       </widget>
       <widget class="QDoubleSpinBox" name="RR_r_velIgain">
@@ -1695,7 +1744,10 @@ text-decoration: underline;</string>
         <number>1</number>
        </property>
        <property name="maximum">
-        <double>1000.000000000000000</double>
+        <double>10000.000000000000000</double>
+       </property>
+       <property name="value">
+        <double>800.000000000000000</double>
        </property>
       </widget>
       <widget class="QDoubleSpinBox" name="RL_r_velDgain">
@@ -1738,7 +1790,7 @@ text-decoration: underline;</string>
         <double>10000.000000000000000</double>
        </property>
        <property name="value">
-        <double>800.000000000000000</double>
+        <double>150.000000000000000</double>
        </property>
       </widget>
       <widget class="QDoubleSpinBox" name="RL_r_velPgain">
@@ -1760,6 +1812,9 @@ text-decoration: underline;</string>
        <property name="maximum">
         <double>10000.000000000000000</double>
        </property>
+       <property name="value">
+        <double>100.000000000000000</double>
+       </property>
       </widget>
       <widget class="QDoubleSpinBox" name="FR_r_velIgain">
        <property name="geometry">
@@ -1778,7 +1833,7 @@ text-decoration: underline;</string>
         <number>1</number>
        </property>
        <property name="maximum">
-        <double>1000.000000000000000</double>
+        <double>10000.000000000000000</double>
        </property>
        <property name="value">
         <double>1000.000000000000000</double>
@@ -1837,7 +1892,10 @@ text-decoration: underline;</string>
         <number>1</number>
        </property>
        <property name="maximum">
-        <double>1000.000000000000000</double>
+        <double>10000.000000000000000</double>
+       </property>
+       <property name="value">
+        <double>800.000000000000000</double>
        </property>
       </widget>
       <widget class="QDoubleSpinBox" name="RL_r_velIgain">
@@ -1857,7 +1915,10 @@ text-decoration: underline;</string>
         <number>1</number>
        </property>
        <property name="maximum">
-        <double>1000.000000000000000</double>
+        <double>10000.000000000000000</double>
+       </property>
+       <property name="value">
+        <double>800.000000000000000</double>
        </property>
       </widget>
       <widget class="QLabel" name="label_20">
@@ -1998,7 +2059,7 @@ text-decoration: underline;</string>
         <double>10000.000000000000000</double>
        </property>
        <property name="value">
-        <double>800.000000000000000</double>
+        <double>150.000000000000000</double>
        </property>
       </widget>
       <widget class="QDoubleSpinBox" name="FR_th_velPgain">
@@ -2043,6 +2104,9 @@ text-decoration: underline;</string>
        <property name="maximum">
         <double>10000.000000000000000</double>
        </property>
+       <property name="value">
+        <double>100.000000000000000</double>
+       </property>
       </widget>
       <widget class="QDoubleSpinBox" name="RL_th_velPgain">
        <property name="geometry">
@@ -2063,6 +2127,9 @@ text-decoration: underline;</string>
        <property name="maximum">
         <double>10000.000000000000000</double>
        </property>
+       <property name="value">
+        <double>100.000000000000000</double>
+       </property>
       </widget>
       <widget class="QDoubleSpinBox" name="FL_th_velIgain">
        <property name="geometry">
@@ -2081,7 +2148,10 @@ text-decoration: underline;</string>
         <number>1</number>
        </property>
        <property name="maximum">
-        <double>1000.000000000000000</double>
+        <double>10000.000000000000000</double>
+       </property>
+       <property name="value">
+        <double>800.000000000000000</double>
        </property>
       </widget>
       <widget class="QDoubleSpinBox" name="RL_th_velIgain">
@@ -2101,7 +2171,10 @@ text-decoration: underline;</string>
         <number>1</number>
        </property>
        <property name="maximum">
-        <double>1000.000000000000000</double>
+        <double>10000.000000000000000</double>
+       </property>
+       <property name="value">
+        <double>800.000000000000000</double>
        </property>
       </widget>
       <widget class="QDoubleSpinBox" name="RR_th_velIgain">
@@ -2121,7 +2194,10 @@ text-decoration: underline;</string>
         <number>1</number>
        </property>
        <property name="maximum">
-        <double>1000.000000000000000</double>
+        <double>10000.000000000000000</double>
+       </property>
+       <property name="value">
+        <double>800.000000000000000</double>
        </property>
       </widget>
       <widget class="QDoubleSpinBox" name="FR_th_velIgain">
@@ -2141,7 +2217,7 @@ text-decoration: underline;</string>
         <number>1</number>
        </property>
        <property name="maximum">
-        <double>1000.000000000000000</double>
+        <double>10000.000000000000000</double>
        </property>
        <property name="value">
         <double>1000.000000000000000</double>
@@ -2167,7 +2243,7 @@ text-decoration: underline;</string>
         <double>1000.000000000000000</double>
        </property>
        <property name="value">
-        <double>200.000000000000000</double>
+        <double>0.000000000000000</double>
        </property>
       </widget>
       <widget class="QDoubleSpinBox" name="FR_th_velDgain">
@@ -2443,7 +2519,7 @@ text-decoration: underline;</string>
      <widget class="QCheckBox" name="posctrl_mode">
       <property name="geometry">
        <rect>
-        <x>440</x>
+        <x>430</x>
         <y>40</y>
         <width>131</width>
         <height>20</height>
@@ -2459,7 +2535,7 @@ text-decoration: underline;</string>
      <widget class="QCheckBox" name="velctrl_mode">
       <property name="geometry">
        <rect>
-        <x>440</x>
+        <x>430</x>
         <y>60</y>
         <width>131</width>
         <height>20</height>
@@ -2511,7 +2587,7 @@ color: white</string>
      <widget class="QLabel" name="label_38">
       <property name="geometry">
        <rect>
-        <x>520</x>
+        <x>500</x>
         <y>10</y>
         <width>151</width>
         <height>21</height>
@@ -2526,7 +2602,7 @@ color: white</string>
        <rect>
         <x>40</x>
         <y>40</y>
-        <width>241</width>
+        <width>231</width>
         <height>31</height>
        </rect>
       </property>
@@ -2569,7 +2645,7 @@ color: Black</string>
      <widget class="QPushButton" name="logging_on">
       <property name="geometry">
        <rect>
-        <x>290</x>
+        <x>280</x>
         <y>40</y>
         <width>111</width>
         <height>31</height>
@@ -2578,15 +2654,15 @@ color: Black</string>
       <property name="font">
        <font>
         <family>Times new roman</family>
-        <pointsize>14</pointsize>
+        <pointsize>12</pointsize>
         <italic>false</italic>
         <bold>false</bold>
        </font>
       </property>
       <property name="styleSheet">
-       <string notr="true">background-color: rgb(250, 250, 0);
+       <string notr="true">background-color: rgb(200, 200, 0);
 
-font: 14pt &quot;Times new roman&quot;;
+font: 12pt &quot;Times new roman&quot;;
 color: Black</string>
       </property>
       <property name="text">
@@ -2600,9 +2676,9 @@ color: Black</string>
       <property name="geometry">
        <rect>
         <x>890</x>
-        <y>10</y>
-        <width>281</width>
-        <height>131</height>
+        <y>20</y>
+        <width>191</width>
+        <height>101</height>
        </rect>
       </property>
       <property name="styleSheet">
@@ -2619,9 +2695,9 @@ color: Black</string>
       <property name="geometry">
        <rect>
         <x>890</x>
-        <y>230</y>
-        <width>181</width>
-        <height>71</height>
+        <y>210</y>
+        <width>191</width>
+        <height>61</height>
        </rect>
       </property>
       <property name="font">
@@ -2633,7 +2709,7 @@ color: Black</string>
        </font>
       </property>
       <property name="styleSheet">
-       <string notr="true">background-color: rgb(200, 0, 0);</string>
+       <string notr="true">background-color: rgb(30, 40, 50);</string>
       </property>
       <property name="text">
        <string>Control ON/OFF</string>
@@ -2646,9 +2722,9 @@ color: Black</string>
       <property name="geometry">
        <rect>
         <x>890</x>
-        <y>310</y>
-        <width>181</width>
-        <height>71</height>
+        <y>270</y>
+        <width>191</width>
+        <height>61</height>
        </rect>
       </property>
       <property name="font">
@@ -2660,7 +2736,7 @@ color: Black</string>
        </font>
       </property>
       <property name="styleSheet">
-       <string notr="true">background-color: rgb(50, 40, 80);</string>
+       <string notr="true">background-color: rgb(40, 50, 60);</string>
       </property>
       <property name="text">
        <string>RWDOB ON/OFF</string>
@@ -2992,7 +3068,7 @@ text-decoration: underline;</string>
         <double>10000.000000000000000</double>
        </property>
        <property name="value">
-        <double>10.000000000000000</double>
+        <double>220.000000000000000</double>
        </property>
       </widget>
       <widget class="QDoubleSpinBox" name="RR_Ori_DOB_cutoff">
@@ -3069,9 +3145,9 @@ text-decoration: underline;</string>
       <property name="geometry">
        <rect>
         <x>890</x>
-        <y>390</y>
-        <width>181</width>
-        <height>71</height>
+        <y>330</y>
+        <width>191</width>
+        <height>61</height>
        </rect>
       </property>
       <property name="font">
@@ -3083,7 +3159,7 @@ text-decoration: underline;</string>
        </font>
       </property>
       <property name="styleSheet">
-       <string notr="true">background-color: rgb(0, 100, 30);</string>
+       <string notr="true">background-color: rgb(100, 70, 70);</string>
       </property>
       <property name="text">
        <string>Ori DOB ON/OFF</string>
@@ -3095,10 +3171,10 @@ text-decoration: underline;</string>
      <widget class="QCheckBox" name="Leg_ctrl_mode">
       <property name="geometry">
        <rect>
-        <x>590</x>
+        <x>580</x>
         <y>40</y>
         <width>131</width>
-        <height>20</height>
+        <height>21</height>
        </rect>
       </property>
       <property name="styleSheet">
@@ -3111,7 +3187,7 @@ text-decoration: underline;</string>
      <widget class="QCheckBox" name="Trunk_ctrl_mode">
       <property name="geometry">
        <rect>
-        <x>590</x>
+        <x>580</x>
         <y>60</y>
         <width>131</width>
         <height>20</height>

@@ -51,8 +51,10 @@ void sensor_data::get_IMU_data()
   
   }
   
-  for(int i = 0; i < 3; i++)
-  Trunk_linear_vel[i] = 9.81*Trunk_data[i];
+
+  Trunk_linear_vel[0] = 9.81 * Trunk_data[1];
+  Trunk_linear_vel[1] = 9.81 * Trunk_data[0];
+  Trunk_linear_vel[2] = 9.81 * Trunk_data[2];
   Trunk_ori[0] = Trunk_data[4]; // Alpha dot 
   Trunk_ori[1] = Trunk_data[3]; // Beta dot
   Trunk_ori[2] = Trunk_data[5]; // Gamma dot

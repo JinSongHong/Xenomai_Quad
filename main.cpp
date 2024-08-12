@@ -200,7 +200,11 @@ Actuator ACT_FRKNEE(3, 2.59478);
 
 Actuator ACT_FLHAA(0, 0);
 Actuator ACT_FLHIP(1, 0.546812); // 31.345degree
-Actuator ACT_FLKNEE(2, 2.59478); // 148.67degree
+Actuator ACT_FLKNEE(2, 2.59478); // 148.67degree 
+
+Actuator ACT_WL(12,0);
+Actuator ACT_WR(13,0);
+
 //========================================================== 
 
 Kinematics K_FL;
@@ -231,6 +235,7 @@ bool Homming = false;
 bool Ctrl_on = false;
 bool stop = false;
 bool IMU_on = false;
+bool safety_flag = true;
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////* Mode selcetion*//////////////////////////////////////////////
@@ -569,8 +574,8 @@ static void *realtime_thread(void *arg)
         
         /**************** Data receive from ELMO ***************/
         
-        ACT_FLHAA.DATA_Receive(in_twitter_GTWI);    ACT_FLHIP.DATA_Receive(in_twitter_GTWI);    ACT_FLKNEE.DATA_Receive(in_twitter_GTWI);
-        ACT_FRHAA.DATA_Receive(in_twitter_GTWI);    ACT_FRHIP.DATA_Receive(in_twitter_GTWI);    ACT_FRKNEE.DATA_Receive(in_twitter_GTWI);
+        ACT_FLHAA.DATA_Receive(in_twitter_GTWI);    ACT_FLHIP.DATA_Receive(in_twitter_GTWI);    ACT_FLKNEE.DATA_Receive(in_twitter_GTWI);   ACT_WL.DATA_Receive(in_twitter_GTWI);
+        ACT_FRHAA.DATA_Receive(in_twitter_GTWI);    ACT_FRHIP.DATA_Receive(in_twitter_GTWI);    ACT_FRKNEE.DATA_Receive(in_twitter_GTWI);   ACT_WR.DATA_Receive(in_twitter_GTWI);
         ACT_RLHAA.DATA_Receive(in_twitter_GTWI);    ACT_RLHIP.DATA_Receive(in_twitter_GTWI);    ACT_RLKNEE.DATA_Receive(in_twitter_GTWI);
         ACT_RRHAA.DATA_Receive(in_twitter_GTWI);    ACT_RRHIP.DATA_Receive(in_twitter_GTWI);    ACT_RRKNEE.DATA_Receive(in_twitter_GTWI);
     
@@ -624,8 +629,8 @@ static void *realtime_thread(void *arg)
         traj.Trunk_vel_traj(traj_t*0.001);
         
         if(Traj_on) // button stop -> stop time temporally, 
-          traj_t += 1 ; 
-          
+        traj_t += 1 ; 
+        
           
         /****************** State ******************/ // pos RW
         //Admittance -> double, K_FL.get_posRW() ->vector2d
@@ -635,7 +640,7 @@ static void *realtime_thread(void *arg)
         posRW_RR = K_RR.get_posRW();    velRW_RR = K_RR.get_velRW(); 
         
         /****************** Conrtoller ******************/ // index [0] : R direction output, index [1] : th direction output 
-        if(Ctrl_on == true){
+        if(Ctrl_on == true && safety_flag == true){
           FL_output[0] = C_FL.pid(K_FL.get_posRW_error(0), K_FL.get_posRW_error(1), K_FL.get_velRW_error(0), K_FL.get_velRW_error(1), 0, 0, ctrl_mode); //ctrl_mode = 0 -> pos control
           FL_output[1] = C_FL.pid(K_FL.get_posRW_error(0), K_FL.get_posRW_error(1), K_FL.get_velRW_error(0), K_FL.get_velRW_error(1), 1, 0, ctrl_mode); //ctrl_mode = 1 -> vel control
           
@@ -670,12 +675,14 @@ static void *realtime_thread(void *arg)
         /****************** Put the torque in Motor ******************/
         
         FL_control_input = JTrans_FL * FL_output + C_FL.RWDOB(ACT_FLHIP.getMotor_acc(), ACT_FLKNEE.getMotor_acc(), FL_control_input, J_FL, 0); 
-        FR_control_input = JTrans_FR * FR_output + C_FR.RWDOB(ACT_FRHIP.getMotor_acc(), ACT_FRKNEE.getMotor_acc(), FR_control_input, J_FR,1);    
+        FR_control_input = JTrans_FR * FR_output + C_FR.RWDOB(ACT_FRHIP.getMotor_acc(), ACT_FRKNEE.getMotor_acc(), FR_control_input, J_FR, 1);    
         RL_control_input = JTrans_RL * RL_output + C_RL.RWDOB(ACT_RLHIP.getMotor_acc(), ACT_RLKNEE.getMotor_acc(), RL_control_input, J_RL, 2);
         RR_control_input = JTrans_RR * RR_output + C_RR.RWDOB(ACT_RRHIP.getMotor_acc(), ACT_RRKNEE.getMotor_acc(), RR_control_input, J_RR, 3);
         
-      
+
+        
         Homming_input = traj.homming();
+
         
         /****************** Mutex exchange ******************/
         
@@ -683,14 +690,14 @@ static void *realtime_thread(void *arg)
         {
           C_FL.exchange_mutex(0); C_FR.exchange_mutex(1); C_RL.exchange_mutex(2); C_RR.exchange_mutex(3); 
           
-          C_Trunk.exchange_mutex(0);
+          C_Trunk.Exchagne_mutex();
           
           K_FL.exchange_mutex(0); K_FR.exchange_mutex(1); K_RL.exchange_mutex(2); K_RR.exchange_mutex(3);
           
           Traj_FL.exchange_mutex(0); Traj_FR.exchange_mutex(1); Traj_RL.exchange_mutex(2); Traj_RR.exchange_mutex(3);
           
-          ACT_FLHAA.exchange_mutex();   ACT_FLHIP.exchange_mutex();   ACT_FLKNEE.exchange_mutex();
-          ACT_FRHAA.exchange_mutex();   ACT_FRHIP.exchange_mutex();   ACT_FRKNEE.exchange_mutex();
+          ACT_FLHAA.exchange_mutex();   ACT_FLHIP.exchange_mutex();   ACT_FLKNEE.exchange_mutex();   ACT_WL.exchange_mutex();
+          ACT_FRHAA.exchange_mutex();   ACT_FRHIP.exchange_mutex();   ACT_FRKNEE.exchange_mutex();   ACT_WR.exchange_mutex();
           ACT_RLHAA.exchange_mutex();   ACT_RLHIP.exchange_mutex();   ACT_RLKNEE.exchange_mutex();
           ACT_RRHAA.exchange_mutex();   ACT_RRHIP.exchange_mutex();   ACT_RRKNEE.exchange_mutex();
 
@@ -700,8 +707,8 @@ static void *realtime_thread(void *arg)
 
                 /****************** actuator Data send to ELMO ******************/
         
-        ACT_FLHAA.DATA_Send(out_twitter_GTWI);   ACT_FLHIP.DATA_Send(out_twitter_GTWI);   ACT_FLKNEE.DATA_Send(out_twitter_GTWI);
-        ACT_FRHAA.DATA_Send(out_twitter_GTWI);   ACT_FRHIP.DATA_Send(out_twitter_GTWI);   ACT_FRKNEE.DATA_Send(out_twitter_GTWI);
+        ACT_FLHAA.DATA_Send(out_twitter_GTWI);   ACT_FLHIP.DATA_Send(out_twitter_GTWI);   ACT_FLKNEE.DATA_Send(out_twitter_GTWI);   ACT_WL.DATA_Send(out_twitter_GTWI);
+        ACT_FRHAA.DATA_Send(out_twitter_GTWI);   ACT_FRHIP.DATA_Send(out_twitter_GTWI);   ACT_FRKNEE.DATA_Send(out_twitter_GTWI);   ACT_WR.DATA_Send(out_twitter_GTWI);
         ACT_RLHAA.DATA_Send(out_twitter_GTWI);   ACT_RLHIP.DATA_Send(out_twitter_GTWI);   ACT_RLKNEE.DATA_Send(out_twitter_GTWI);
         ACT_RRHAA.DATA_Send(out_twitter_GTWI);   ACT_RRHIP.DATA_Send(out_twitter_GTWI);   ACT_RRKNEE.DATA_Send(out_twitter_GTWI);
         
@@ -709,7 +716,7 @@ static void *realtime_thread(void *arg)
         // 11-6. Sync data with GUI thread
 
         
-        if (stop == true)
+        if (stop == true || safety_flag == false)
         {
           for(int i = 0; i < 2; i++){
           FL_control_input[i] = 0;
@@ -718,20 +725,26 @@ static void *realtime_thread(void *arg)
           RR_control_input[i] = 0;
           }
         }        
-        
-//        double dist = 10*sin(traj_t*0.001);
-//        double dist = 0;
+  
         //// Data Logging ////
         Logging->data_log();
-//        cout << "in main dist: " << dist << endl;
+        
         //// IMU ////
         IMU.Init_IMU();
+        
+        //// SAFETY ////
+        ACT_FLHAA.safety();   ACT_FLHIP.safety();   ACT_FLKNEE.safety();   ACT_WL.safety();
+        ACT_FRHAA.safety();   ACT_FRHIP.safety();   ACT_FRKNEE.safety();   ACT_WR.safety();
+        ACT_RLHAA.safety();   ACT_RLHIP.safety();   ACT_RLKNEE.safety();
+        ACT_RRHAA.safety();   ACT_RRHIP.safety();   ACT_RRKNEE.safety();
+        
+        
         if(!pthread_mutex_trylock(&data_mut))
         {   
             IMU.get_IMU_data();
             IMU.exchange_mutex();
             traj.Exchagne_mutex();
-            traj.exchange_mutex(0);
+//            traj.exchange_mutex(0);
             Logging->exchange_mutex();
             
             _M_sampling_time_ms = sampling_ms; //when the thread get the mutex, write data into shared global variables
@@ -743,23 +756,26 @@ static void *realtime_thread(void *arg)
             /****************** Motor Torque ******************/
               if(!Homming)
               {
-              _M_motor_torque[0] = 0; // - constant*2;
-              _M_motor_torque[1] = (FL_control_input[0])*constant;
-              _M_motor_torque[2] = FL_control_input[1]*constant;
-              
-
-              _M_motor_torque[5] = 0; //constant*2;
-              _M_motor_torque[4] = (-FR_control_input[0])*constant;
-              _M_motor_torque[3] = (-FR_control_input[1])*constant;
- 
-             
-              _M_motor_torque[6] = 0; // - constant*2;
-              _M_motor_torque[7] = RR_control_input[0]*constant;
-              _M_motor_torque[8] = -RR_control_input[1]*constant;
-              
-              _M_motor_torque[9] = 0; //constant*2;
-              _M_motor_torque[10] = RL_control_input[0]*constant;
-              _M_motor_torque[11] = RL_control_input[1]*constant;
+                _M_motor_torque[0] = -Homming_input[0]*constant * 2; // - constant*2;
+                _M_motor_torque[1] = (FL_control_input[0])*constant;
+                _M_motor_torque[2] = FL_control_input[1]*constant;
+                
+  
+                _M_motor_torque[5] = Homming_input[5]*constant * 2;
+                _M_motor_torque[4] = (-FR_control_input[0])*constant;
+                _M_motor_torque[3] = (-FR_control_input[1])*constant;
+   
+               
+                _M_motor_torque[6] = -Homming_input[6]*constant * 2;
+                _M_motor_torque[7] = RR_control_input[0]*constant;
+                _M_motor_torque[8] = -RR_control_input[1]*constant;
+                
+                _M_motor_torque[11] = Homming_input[11]*constant * 2;
+                _M_motor_torque[10] = RL_control_input[0]*constant;
+                _M_motor_torque[9] = RL_control_input[1]*constant;
+                
+                
+                _M_motor_torque[13] = Homming_input[13]*constant;
               }
               else
               {
@@ -791,7 +807,7 @@ static void *realtime_thread(void *arg)
             Traj_on = _M_Traj_ON; // temp_stop pressed 
             Ctrl_on = _M_Ctrl_on;
             stop = _M_stop;   
-            
+            safety_flag = _M_safety_flag;
                     
             /***************** Mode selection ******************/
             ctrl_mode = _M_ctrl_mode;

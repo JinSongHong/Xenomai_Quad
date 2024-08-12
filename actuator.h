@@ -76,12 +76,19 @@ public:
   void DATA_Send(output_GTWI_t **out_twitter_GTWI);
   void DATA_unit_change();
   void get_Derivative_cutoff();
+  void safety();
 
   void exchange_mutex();
   double getMotor_pos() { return Motor_pos; }; // return first address of Motor_pos
   double getMotor_vel() { return Motor_vel; };
   double getMotor_torque() { return Motor_torque; };
   double getMotor_acc() {return Motor_acc;}
+  
+  //// Safety ////
+  bool safety_on = false;
+  bool safety_flag = true;
+  
+  double current_limit = 5;
 };
 
 #endif // ACTUATOR_H

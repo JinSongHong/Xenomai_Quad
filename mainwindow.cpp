@@ -40,18 +40,29 @@ MainWindow::MainWindow(QWidget *parent)
   createPlot(ui->FL_r_plot);
   createPlot(ui->FL_th_plot);
   createPlot(ui->FL_others); 
+  createPlot_3data(ui->FL_current);
     //FR
   createPlot(ui->FR_r_plot);
   createPlot(ui->FR_th_plot);
   createPlot(ui->FR_others); 
+  createPlot_3data(ui->FR_current);
     //RL
   createPlot(ui->RL_r_plot);
   createPlot(ui->RL_th_plot);
   createPlot(ui->RL_others); 
+  createPlot_3data(ui->RL_current);
     //RR
   createPlot(ui->RR_r_plot);
   createPlot(ui->RR_th_plot);
   createPlot(ui->RR_others); 
+  createPlot_3data(ui->RR_current); 
+  
+  //Trunk
+  createPlot_3data(ui->Trunk_ang_vel);
+  createPlot_3data(ui->Trunk_linear_vel);
+    
+    
+       
   
   
    Motor_Home_pos[0] = 0;
@@ -83,26 +94,38 @@ void MainWindow::updateWindow()
   Mutex_exchange();
   
   //*************** plot data ***************//
+
+  // Trunk
+  drawPlot_3data(ui->Trunk_ang_vel, Trunk_ori[0], Trunk_ori[1], Trunk_ori[2], ui->Trunk_ang_vel_autoscale);
+  drawPlot_3data(ui->Trunk_linear_vel, Trunk_linear_vel[0], Trunk_linear_vel[1], Trunk_linear_vel[2], ui->Trunk_linear_vel_autoscale);
+
+  //Motor Current
+  drawPlot_3data(ui->FL_current, Motor_current[0], Motor_current[1], Motor_current[2],ui->FL_current_autoscale);
+  ui->FL_current->yAxis->setRange(-45,45);  
+  drawPlot_3data(ui->FR_current, Motor_current[5], Motor_current[4], Motor_current[3],ui->FR_current_autoscale);
+  ui->FR_current->yAxis->setRange(-45,45);  
+  drawPlot_3data(ui->RL_current, Motor_current[11], Motor_current[10], Motor_current[9],ui->RL_current_autoscale);
+  ui->RL_current->yAxis->setRange(-45,45);
+  drawPlot_3data(ui->RR_current, Motor_current[6], Motor_current[7], Motor_current[8],ui->RR_current_autoscale);
+  ui->RR_current->yAxis->setRange(-45,45);
   
   
   if(ui->Select_data->currentIndex() == 0)
   {
-    //joint
-
-    
-    
-    
+ 
+ 
     //FL
     drawPlot(ui->FL_r_plot, RW_r_pos[0], ref_r_pos[0], ui->FL_r_autoscale) ;
     ui->FL_r_plot->yAxis->setRange(0, 0.5);
     drawPlot(ui->FL_th_plot, RW_th_pos[0], ref_th_pos[0], ui->FL_th_autoscale);
     ui->FL_th_plot->yAxis->setRange(0, PI);
-    
+
     //FR
     drawPlot(ui->FR_r_plot, RW_r_pos[1], ref_r_pos[1], ui->FR_r_autoscale) ;
     ui->FR_r_plot->yAxis->setRange(0, 0.5);
     drawPlot(ui->FR_th_plot, RW_th_pos[1], ref_th_pos[1], ui->FR_th_autoscale);
-    ui->RL_th_plot->yAxis->setRange(0, PI);
+    ui->FR_th_plot->yAxis->setRange(0, PI);
+
     
     //RL
     drawPlot(ui->RL_r_plot, RW_r_pos[2], ref_r_pos[2], ui->RL_r_autoscale) ;
@@ -115,6 +138,7 @@ void MainWindow::updateWindow()
     ui->RR_r_plot->yAxis->setRange(0, 0.5);
     drawPlot(ui->RR_th_plot, RW_th_pos[3], ref_th_pos[3], ui->RR_th_autoscale);
     ui->RR_th_plot->yAxis->setRange(0, PI);
+
   }
   else if(ui->Select_data->currentIndex() == 1)
   {
@@ -128,7 +152,7 @@ void MainWindow::updateWindow()
     drawPlot(ui->FR_r_plot, RW_r_vel[1], ref_r_vel[1], ui->FR_r_autoscale) ;
     ui->FR_r_plot->yAxis->setRange(0, 0.5);
     drawPlot(ui->FR_th_plot, RW_th_vel[1], ref_th_vel[1], ui->FR_th_autoscale);
-    ui->RL_th_plot->yAxis->setRange(0, PI);
+    ui->FR_th_plot->yAxis->setRange(0, PI);
     
     //RL
     drawPlot(ui->RL_r_plot, RW_r_vel[2], ref_r_vel[2], ui->RL_r_autoscale) ;
@@ -143,32 +167,32 @@ void MainWindow::updateWindow()
     ui->RR_th_plot->yAxis->setRange(0, PI);
   }
   
+
   if(ui->Select_data_2->currentIndex() == 0)
-  {
-    drawPlot(ui->FL_others, Motor_current[1], Motor_current[2], ui->FL_others_autoscale);
-    drawPlot(ui->FR_others, Motor_current[4], Motor_current[3], ui->FR_others_autoscale);
-    drawPlot(ui->RL_others, Motor_current[11], Motor_current[10], ui->RL_others_autoscale);
-    drawPlot(ui->RR_others, Motor_current[8], Motor_current[9], ui->RR_others_autoscale);
-  }
-  else if(ui->Select_data_2->currentIndex() == 1)
   {
     drawPlot(ui->FL_others, tau_dhat[0][0], tau_dhat[0][1], ui->FL_others_autoscale);
     drawPlot(ui->FR_others, tau_dhat[1][0], tau_dhat[1][1], ui->FR_others_autoscale);
     drawPlot(ui->RL_others, tau_dhat[2][0], tau_dhat[2][1], ui->RL_others_autoscale);
     drawPlot(ui->RR_others, tau_dhat[3][0], tau_dhat[3][1], ui->RR_others_autoscale);
   }
-  else if(ui->Select_data_2->currentIndex() == 2) 
+  else if(ui->Select_data_2->currentIndex() == 1) 
   {
     drawPlot(ui->FL_others, forceExt_hat[0][0], forceExt_hat[0][1], ui->FL_others_autoscale);
     drawPlot(ui->FR_others, forceExt_hat[1][0], forceExt_hat[1][1], ui->FR_others_autoscale);
     drawPlot(ui->RL_others, forceExt_hat[2][0], forceExt_hat[2][1], ui->RL_others_autoscale);
     drawPlot(ui->RR_others, forceExt_hat[3][0], forceExt_hat[3][1], ui->RR_others_autoscale);
   }
-  else 
+  else if(ui->Select_data_2->currentIndex() == 2)
+  {
+    drawPlot(ui->FL_others, ori_dhat_LPF[0], ori_dhat_LPF[0], ui->FL_others_autoscale);
+    drawPlot(ui->FR_others, ori_dhat_LPF[1], ori_dhat_LPF[1], ui->FR_others_autoscale);
+    drawPlot(ui->RL_others, ori_dhat_LPF[2], ori_dhat_LPF[2], ui->RL_others_autoscale);
+    drawPlot(ui->RR_others, ori_dhat_LPF[3], ori_dhat_LPF[3], ui->RR_others_autoscale);
+  }
+  else
   {
   
   }
-
 
 }
 
@@ -203,9 +227,7 @@ void MainWindow::drawPlot_3data(QCustomPlot *plot, double data1, double data2, d
   plot->xAxis->setRange(key,Plot_time_window_POS,Qt::AlignRight);
 
   if(autoscale->isChecked()) {
-  plot->graph(0)->rescaleValueAxis(false,true);
-  plot->graph(1)->rescaleValueAxis(false,true);
-  plot->graph(2)->rescaleValueAxis(false,true);
+    plot->yAxis->rescale();
   }
   
   plot->graph(0)->data()->removeBefore(key-Plot_time_window_POS);
@@ -318,12 +340,15 @@ void MainWindow::Mutex_exchange(){
         ref_r_vel[i] = _M_ref_r_vel[i];
         ref_th_vel[i] = _M_ref_th_vel[i];
         
-        tau_dhat[i] = _M_tau_dhat[i];        
+        tau_dhat[i] = _M_tau_dhat[i];      
         forceExt_hat[i] =_M_forceExt_hat[i]; 
       }
       
+      IMU_on = _M_IMU_on;
+      Trunk_ori = _M_Trunk_ori;
+      Trunk_linear_vel = _M_Trunk_linear_vel;
+      ori_dhat_LPF = _M_ori_dhat_LPF;
       
-
     } else {
       QString str_errCode;
       str_errCode.setNum(ret);

@@ -108,5 +108,9 @@ bool _M_stop = false;
 bool _M_IMU_on = false;
 bool _M_RWDOB_on = false;
 bool _M_OriDOB_on = false;
+bool _M_safety_on = false;
+bool _M_safety_flag = true;
 
+//// Safety ////
+double _M_current_limit = 5;
 

@@ -81,8 +81,11 @@ private slots:
     
     Vector4d Ori_DOB_cutoff = Vector4d{10,10,10,10};
     
+    //// Safety ////
+    double current_limit = 5;
     
-    // flag //
+    
+    //// flag ////
     bool Traj_on = false;
     bool Ctrl_on = false;
     int CtrlMode;
@@ -94,6 +97,7 @@ private slots:
     bool RWDOB_on = false;
     bool OriDOB_on = false;
     bool IMU_on = false;
+    bool safety_on = false;
     int Trunk_Leg_CtrlMode = 100;
     
     
